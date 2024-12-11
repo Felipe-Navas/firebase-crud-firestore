@@ -27,19 +27,20 @@ window.addEventListener('DOMContentLoaded', async () => {
   // })
 
   onGetTasks((querySnapshot) => {
-    let html = ''
+    taskContainer.innerHTML = ''
     querySnapshot.forEach((doc) => {
       const { title, description } = doc.data()
-      html += `
-        <div>
-          <h3>${title}</h3>
+      taskContainer.innerHTML += `
+        <div class="card card-body mt-2 border-primary">
+          <h3 class="h5">${title}</h3>
           <p>${description}</p>
-          <button class="btn-delete" data-id="${doc.id}">Delete</button>
-          <button class="btn-edit" data-id="${doc.id}">Edit</button>
+          <div class=""d-flex">
+            <button class="btn btn-danger btn-delete" data-id="${doc.id}">Delete</button>
+            <button class="btn btn-secondary btn-edit" data-id="${doc.id}">Edit</button>
+          </div>
         </div>
     `
     })
-    taskContainer.innerHTML = html
 
     const btnsDelete = taskContainer.querySelectorAll('.btn-delete')
     btnsDelete.forEach((btn) => {
