@@ -3,6 +3,8 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebas
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getFirestore,
   getDocs,
   onSnapshot,
@@ -35,4 +37,8 @@ export const getTasks = () => {
 
 export const onGetTasks = (callback) => {
   onSnapshot(collection(db, 'tasks'), callback)
+}
+
+export const deleteTask = (taskId) => {
+  deleteDoc(doc(db, 'tasks', taskId))
 }
